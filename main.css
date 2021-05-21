@@ -151,6 +151,50 @@ body {
 }
 /*//////////NAV STYLE ENDS//////////////////////////// */
 
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding: 1rem;
+}
+.user-image-section {
+  position: relative;
+}
+#user-profile-image {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+}
+.desktop-user-status {
+  position: absolute;
+  bottom: 20%;
+  right: 5%;
+}
+.user-bio {
+  display: none;
+}
+.mobile-user-status {
+  margin-top: 10px;
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-fullname {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.desktop-user-status {
+  display: none;
+}
+
+#profile-section {
+  grid-row: 1 / 2;
+}
+
 @media screen and (min-width: 615px) {
   #mobile-navbar {
     display: none;
