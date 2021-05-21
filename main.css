@@ -16,6 +16,7 @@ body {
   width: 100%;
 }
 
+/* HEADER AND NAV BAR STYLES ///////////////////////////////*/
 .header {
   width: 100%;
   background-color: #010409;
@@ -26,9 +27,18 @@ body {
   background-color: #24292f;
   width: 100%;
   padding: 0.6rem 1rem;
-  height: 54px;
+  transition: height 0.3s ease;
 }
 
+.closed {
+  height: 54px;
+}
+.open {
+  height: max-content;
+}
+#mobile-navbar {
+  overflow: hidden;
+}
 .mobile-nav-wrapper,
 #desktop-navbar,
 .desktop-user-icon {
@@ -38,6 +48,7 @@ body {
 }
 #desktop-navbar {
   display: none;
+  height: 54px;
 }
 
 .desktop-nav-wrapper,
@@ -69,26 +80,38 @@ body {
   font-size: 18px;
 }
 
+#mobile-menu-btn {
+  cursor: pointer;
+}
+
 .github {
   font-size: 24px;
   color: #fff;
 }
 
 .search-box {
-  border: 1px solid #808080af;
+  border: 1px solid #ffffff1b;
+  background: #0d1117;
   border-radius: 3px;
   padding: 3px 5px;
   font-size: 12px;
 }
 
-.desktop-navbar-search-btn {
-  border: 1px solid #808080af;
+.mobile-search-box {
+  margin-bottom: 20px;
+}
+
+.desktop-navbar-search-btn,
+.mobile-navbar-search-btn {
+  border: 1px solid #ffffff1b;
   padding: 1px 5px;
   border-radius: 3px;
   color: grey;
+  float: right;
 }
 
-#desktop-search-input {
+#desktop-search-input,
+#mobile-search-input {
   background: none;
   border: none;
   outline: none;
@@ -96,7 +119,8 @@ body {
   font-size: 12px;
 }
 
-#desktop-search-input::placeholder {
+#desktop-search-input::placeholder,
+#mobile-search-input::placeholder {
   color: #ffffff7e;
 }
 
@@ -107,6 +131,25 @@ body {
 .desktop-user-icon-img {
   border-radius: 50%;
 }
+.mobile-nav-link-wrapper {
+  margin-top: 20px;
+}
+.mobile-nav-link {
+  text-decoration: none;
+  color: #f0f6fc;
+  display: block;
+  padding: 5px 0;
+  border-top: 0.3px solid #ffffff1b;
+  font-size: 12px;
+}
+.mobile-user-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+#mobile-user-icon-img {
+  border-radius: 50%;
+}
+/*//////////NAV STYLE ENDS//////////////////////////// */
 
 @media screen and (min-width: 615px) {
   #mobile-navbar {

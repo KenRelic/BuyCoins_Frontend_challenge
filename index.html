@@ -13,12 +13,44 @@
   </head>
   <body>
     <header class="header">
-      <nav class="navbar" id="mobile-navbar">
+      <nav class="navbar closed" id="mobile-navbar">
         <ul class="mobile-nav-wrapper">
-          <li class="mobile-nav-item"><i class="fas fa-bars"></i></li>
+          <li class="mobile-nav-item" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </li>
           <li class="mobile-nav-item github"><i class="fab fa-github"></i></li>
           <li class="mobile-nav-item"><i class="far fa-bell"></i></li>
         </ul>
+        <div class="mobile-nav-link-wrapper">
+          <div class="search-box mobile-search-box">
+            <input
+              type="search"
+              name=""
+              placeholder="Search or jump to.."
+              id="mobile-search-input"
+            />
+            <span class="mobile-navbar-search-btn">/</span>
+          </div>
+          <a href="" class="mobile-nav-link">Dashboard</a
+          ><a href="" class="mobile-nav-link">Pull requests</a
+          ><a href="" class="mobile-nav-link">Issues</a
+          ><a href="" class="mobile-nav-link">Marketplace</a
+          ><a href="" class="mobile-nav-link">Explore</a
+          ><a href="" class="mobile-nav-link">Codespaces</a
+          ><a href="" class="mobile-nav-link">Sponsors</a
+          ><a href="" class="mobile-nav-link">Settings</a
+          ><a href="" class="mobile-nav-link mobile-user-icon-wrapper"
+            ><img
+              id="mobile-user-icon-img"
+              src="./kenchi.png"
+              width="15"
+              height="15"
+            />
+            <span id="mobile-user-icon-img">KenRelic</span></a
+          ><a href="" class="mobile-nav-link"
+            ><i class="fas fa-sign-out-alt"></i> Sign out</a
+          >
+        </div>
       </nav>
       <nav class="navbar" id="desktop-navbar">
         <div class="desktop-nav-wrapper" id="">
@@ -57,5 +89,6 @@
         </div>
       </nav>
     </header>
+    <script src="./main.js"></script>
   </body>
 </html>
