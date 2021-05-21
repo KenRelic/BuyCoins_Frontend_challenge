@@ -154,8 +154,41 @@ body {
 .main {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  padding: 1rem;
+  grid-template-rows: auto;
+  /* padding: 1rem; */
+}
+
+#profile-section {
+  grid-row: 1 / 2;
+  padding: 0 1rem;
+}
+
+#profile-tab-section {
+  grid-row: 2 / 3;
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid grey;
+  font-size: 12px;
+}
+
+.profile-tab {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.profile-tab:hover {
+  border-bottom: 2px solid tomato;
+  font-weight: bold;
+}
+
+#repo-count {
+  font-size: 10px;
+  padding: 0.2px 4px;
+  background-color: #4343435d;
+  border-radius: 34%;
 }
 .user-image-section {
   position: relative;
@@ -175,6 +208,9 @@ body {
 }
 .mobile-user-status {
   margin-top: 10px;
+  padding: 2px 5px;
+  border: 1px solid #8585857e;
+  border-radius: 3px;
 }
 .user-profile {
   display: flex;
@@ -190,11 +226,95 @@ body {
 .desktop-user-status {
   display: none;
 }
-
-#profile-section {
-  grid-row: 1 / 2;
+#repo-section {
+  padding: 1rem;
 }
 
+#find-repo-search {
+  width: 100%;
+  padding: 3px 5px;
+  border: 1px solid #8585857e;
+  margin: 1rem auto;
+  border-radius: 3px;
+  font-size: 12px;
+  border-bottom: 1px solid #8585857e;
+}
+
+#find-repo-search::placeholder {
+  color: #0909097e;
+  font-size: 12px;
+}
+.query-result {
+  border-bottom: 1px solid #8585857e;
+  padding-bottom: 0.6rem;
+  border-top: 1px solid #8585857e;
+  padding-top: 0.6rem;
+  margin-bottom: 20px;
+}
+
+.user-repository {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #8585857e;
+  padding-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repo-detail {
+  width: 75%;
+}
+
+.repo-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #58a6ff;
+  word-wrap: break-word;
+}
+
+.repo-description {
+  font-size: 13px;
+}
+
+.language-color {
+  height: 10px;
+  width: 10px;
+  background-color: orange;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.repo-meta-data {
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  margin-top: 15px;
+}
+
+.github-star {
+  padding: 5px 10px;
+  border: 1px solid #09090941;
+  background-color: #e6e6e64d;
+  border-radius: 3px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.github-star:hover {
+  border: 1px solid #090909d0;
+}
+
+@media screen and (max-width: 399px) {
+  .profile-tab i {
+    display: none;
+  }
+}
+@media screen and (max-width: 338px) {
+  #profile-tab-section {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
 @media screen and (min-width: 615px) {
   #mobile-navbar {
     display: none;

@@ -111,8 +111,10 @@
           ><i class="fas fa-book-open"></i> Overview</a
         >
         <a class="profile-tab repo-tab"
-          ><i class="fas fa-book"></i> Repositories
-          <span id="repo-count">20</span></a
+          ><i class="fas fa-book"></i>&nbsp;Repositories&nbsp;<span
+            id="repo-count"
+            >20</span
+          ></a
         >
         <a class="profile-tab projects-tab"
           ><i class="fas fa-poll"></i> Projects</a
@@ -121,7 +123,37 @@
           ><i class="fas fa-cube"></i> Packages</a
         >
       </section>
-      <section class="section" id="repo-section"></section>
+      <section class="section" id="repo-section">
+        <input
+          type="text"
+          name="search-repo"
+          placeholder="Find a repository..."
+          id="find-repo-search"
+        />
+        <p class="query-result">20 Results for Public Repositories</p>
+        <div class="user-repository">
+          <div class="repo-detail">
+            <h3 class="repo-name">Simple Server</h3>
+            <p class="repo-description">
+              Testing an app to check responsiveness. Trying to test the app.
+            </p>
+            <div class="repo-meta-data">
+              <div class="language">
+                <div class="language-color"></div>
+                HTML
+              </div>
+              <span class="repo-star"><i class="far fa-star"></i> 20</span>
+              <span class="repo-fork"
+                ><i class="fas fa-code-branch"></i> 20</span
+              >
+              <span class="repo-date">Updated on 1 Oct</span>
+            </div>
+          </div>
+          <div class="github-star">
+            <span class="repo-star"><i class="far fa-star"></i></span> Star
+          </div>
+        </div>
+      </section>
     </main>
     <script src="./main.js"></script>
   </body>
