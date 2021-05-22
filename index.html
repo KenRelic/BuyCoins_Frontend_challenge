@@ -12,149 +12,183 @@
     ></script>
   </head>
   <body>
-    <header class="header">
-      <nav class="navbar closed" id="mobile-navbar">
-        <ul class="mobile-nav-wrapper">
-          <li class="mobile-nav-item" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-          </li>
-          <li class="mobile-nav-item github"><i class="fab fa-github"></i></li>
-          <li class="mobile-nav-item"><i class="far fa-bell"></i></li>
-        </ul>
-        <div class="mobile-nav-link-wrapper">
-          <div class="search-box mobile-search-box">
-            <input
-              type="search"
-              name=""
-              placeholder="Search or jump to.."
-              id="mobile-search-input"
-            />
-            <span class="mobile-navbar-search-btn">/</span>
+    <section id="profile-section">
+      <header class="header">
+        <nav class="navbar closed" id="mobile-navbar">
+          <ul class="mobile-nav-wrapper">
+            <li class="mobile-nav-item" id="mobile-menu-btn">
+              <i class="fas fa-bars"></i>
+            </li>
+            <li class="mobile-nav-item github">
+              <i class="fab fa-github"></i>
+            </li>
+            <li class="mobile-nav-item"><i class="far fa-bell"></i></li>
+          </ul>
+          <div class="mobile-nav-link-wrapper">
+            <div class="search-box mobile-search-box">
+              <input
+                type="search"
+                name=""
+                placeholder="Search or jump to.."
+                id="mobile-search-input"
+              />
+              <span class="mobile-navbar-search-btn">/</span>
+            </div>
+            <a href="" class="mobile-nav-link">Dashboard</a
+            ><a href="" class="mobile-nav-link">Pull requests</a
+            ><a href="" class="mobile-nav-link">Issues</a
+            ><a href="" class="mobile-nav-link">Marketplace</a
+            ><a href="" class="mobile-nav-link">Explore</a
+            ><a href="" class="mobile-nav-link">Codespaces</a
+            ><a href="" class="mobile-nav-link">Sponsors</a
+            ><a href="" class="mobile-nav-link">Settings</a
+            ><a href="" class="mobile-nav-link mobile-user-icon-wrapper"
+              ><img
+                id="mobile-user-icon-img"
+                src="./kenchi.png"
+                width="15"
+                height="15"
+              />
+              <span id="mobile-user-icon-img">KenRelic</span></a
+            ><a href="" class="mobile-nav-link"
+              ><i class="fas fa-sign-out-alt"></i> Sign out</a
+            >
           </div>
-          <a href="" class="mobile-nav-link">Dashboard</a
-          ><a href="" class="mobile-nav-link">Pull requests</a
-          ><a href="" class="mobile-nav-link">Issues</a
-          ><a href="" class="mobile-nav-link">Marketplace</a
-          ><a href="" class="mobile-nav-link">Explore</a
-          ><a href="" class="mobile-nav-link">Codespaces</a
-          ><a href="" class="mobile-nav-link">Sponsors</a
-          ><a href="" class="mobile-nav-link">Settings</a
-          ><a href="" class="mobile-nav-link mobile-user-icon-wrapper"
-            ><img
-              id="mobile-user-icon-img"
-              src="./kenchi.png"
-              width="15"
-              height="15"
-            />
-            <span id="mobile-user-icon-img">KenRelic</span></a
-          ><a href="" class="mobile-nav-link"
-            ><i class="fas fa-sign-out-alt"></i> Sign out</a
-          >
-        </div>
-      </nav>
-      <nav class="navbar" id="desktop-navbar">
-        <div class="desktop-nav-wrapper" id="">
-          <a href="#" class="desktop-nav-item"
-            ><i class="github fab fa-github"></i
-          ></a>
-          <div class="search-box">
-            <input
-              type="search"
-              name=""
-              placeholder="Search or jump to.."
-              id="desktop-search-input"
-            />
-            <span class="desktop-navbar-search-btn">/</span>
+        </nav>
+        <nav class="navbar" id="desktop-navbar">
+          <div class="desktop-nav-wrapper" id="">
+            <a href="#" class="desktop-nav-item"
+              ><i class="github fab fa-github"></i
+            ></a>
+            <div class="search-box">
+              <input
+                type="search"
+                name=""
+                placeholder="Search or jump to.."
+                id="desktop-search-input"
+              />
+              <span class="desktop-navbar-search-btn">/</span>
+            </div>
+            <a href="#" class="desktop-navbar-link">Pull requests</a
+            ><a href="#" class="desktop-navbar-link">Issues</a
+            ><a href="#" class="desktop-navbar-link">Marketplace</a
+            ><a href="#" class="desktop-navbar-link">Explore</a>
           </div>
-          <a href="#" class="desktop-navbar-link">Pull requests</a
-          ><a href="#" class="desktop-navbar-link">Issues</a
-          ><a href="#" class="desktop-navbar-link">Marketplace</a
-          ><a href="#" class="desktop-navbar-link">Explore</a>
-        </div>
-        <div class="desktop-nav-action">
-          <a class="desktop-nav-item"><i class="far fa-bell"></i></a>
-          <a class="desktop-nav-item"
-            ><i class="fas fa-plus"></i><i class="fas fa-caret-down"></i
-          ></a>
-          <a href="#" class="desktop-user-icon">
-            <img
-              src="./kenchi.png"
-              alt="user-image"
-              class="desktop-user-icon-img"
-              width="18"
-              height="18"
-            />
-            <i class="fas fa-caret-down"></i>
-          </a>
-        </div>
-      </nav>
-    </header>
-    <main class="main">
-      <section class="section" id="profile-section">
-        <div class="user-profile">
-          <div class="user-image-section">
-            <img id="user-profile-image" src="./kenchi.png" alt="user image" />
-            <div class="desktop-user-status">🎯</div>
+          <div class="desktop-nav-action">
+            <a class="desktop-nav-item"><i class="far fa-bell"></i></a>
+            <a class="desktop-nav-item"
+              ><i class="fas fa-plus"></i><i class="fas fa-caret-down"></i
+            ></a>
+            <a href="#" class="desktop-user-icon">
+              <img
+                src="./kenchi.png"
+                alt="user-image"
+                class="desktop-user-icon-img"
+                width="18"
+                height="18"
+              />
+              <i class="fas fa-caret-down"></i>
+            </a>
           </div>
-          <div class="user-bio-section">
-            <p class="user-fullname">Simeon Kenneth T.</p>
-            <p class="user-name">KenRelic</p>
-            <p class="user-bio">
-              Frontend Developer and User interface Designer
-            </p>
-          </div>
-        </div>
-        <div class="mobile-user-status">🎯 Focusing</div>
-      </section>
-      <section class="section" id="profile-tab-section">
-        <a class="profile-tab overview-tab"
-          ><i class="fas fa-book-open"></i> Overview</a
-        >
-        <a class="profile-tab repo-tab"
-          ><i class="fas fa-book"></i>&nbsp;Repositories&nbsp;<span
-            id="repo-count"
-            >20</span
-          ></a
-        >
-        <a class="profile-tab projects-tab"
-          ><i class="fas fa-poll"></i> Projects</a
-        >
-        <a class="profile-tab packages-tab"
-          ><i class="fas fa-cube"></i> Packages</a
-        >
-      </section>
-      <section class="section" id="repo-section">
-        <input
-          type="text"
-          name="search-repo"
-          placeholder="Find a repository..."
-          id="find-repo-search"
-        />
-        <p class="query-result">20 Results for Public Repositories</p>
-        <div class="user-repository">
-          <div class="repo-detail">
-            <a href="#" class="repo-name">Simple Server</a>
-            <p class="repo-description">
-              Testing an app to check responsiveness. Trying to test the app.
-            </p>
-            <div class="repo-meta-data">
-              <div class="language">
-                <div class="language-color"></div>
-                HTML
-              </div>
-              <span class="repo-star"><i class="far fa-star"></i>&nbsp;20</span>
-              <span class="repo-fork"
-                ><i class="fas fa-code-branch"></i>&nbsp;20</span
-              >
-              <span class="repo-date">Updated on 1 Oct</span>
+        </nav>
+      </header>
+      <main class="main">
+        <section class="section" id="profile-section">
+          <div class="user-profile">
+            <div class="user-image-section">
+              <img
+                id="user-profile-image"
+                src="./kenchi.png"
+                alt="user image"
+              />
+              <div class="desktop-user-status">🎯</div>
+            </div>
+            <div class="user-bio-section">
+              <p class="user-fullname">Simeon Kenneth T.</p>
+              <p class="user-name">KenRelic</p>
+              <p class="user-bio">
+                Frontend Developer and User interface Designer
+              </p>
             </div>
           </div>
-          <div class="github-star">
-            <span class="repo-star"><i class="far fa-star"></i></span> Star
+          <div class="mobile-user-status">🎯 Focusing</div>
+        </section>
+        <section class="section" id="profile-tab-section">
+          <a class="profile-tab overview-tab"
+            ><i class="fas fa-book-open"></i> Overview</a
+          >
+          <a class="profile-tab repo-tab"
+            ><i class="fas fa-book"></i>&nbsp;Repositories&nbsp;<span
+              id="repo-count"
+              >20</span
+            ></a
+          >
+          <a class="profile-tab projects-tab"
+            ><i class="fas fa-poll"></i> Projects</a
+          >
+          <a class="profile-tab packages-tab"
+            ><i class="fas fa-cube"></i> Packages</a
+          >
+        </section>
+        <section class="section" id="repo-section">
+          <input
+            type="text"
+            name="search-repo"
+            placeholder="Find a repository..."
+            id="find-repo-search"
+          />
+          <p class="query-result">20 Results for Public Repositories</p>
+          <div class="user-repository">
+            <div class="repo-detail">
+              <a href="#" class="repo-name">Simple Server</a>
+              <p class="repo-description">
+                Testing an app to check responsiveness. Trying to test the app.
+              </p>
+              <div class="repo-meta-data">
+                <div class="language">
+                  <div class="language-color"></div>
+                  HTML
+                </div>
+                <span class="repo-star"
+                  ><i class="far fa-star"></i>&nbsp;20</span
+                >
+                <span class="repo-fork"
+                  ><i class="fas fa-code-branch"></i>&nbsp;20</span
+                >
+                <span class="repo-date">Updated on 1 Oct</span>
+              </div>
+            </div>
+            <div class="github-star">
+              <span class="repo-star"><i class="far fa-star"></i></span> Star
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </section>
+
+    <section id="search-page">
+      <a href="#" id="search-page-github-logo"
+        ><i class="github fab fa-github"></i
+      ></a>
+      <h1 id="form-title">GitHub Profiler</h1>
+      <p class="form-subheading">
+        Enter a github profile username to get all public repo of the user
+      </p>
+      <form id="search-form" name="search-user-form" aria-autocomplete="inline">
+        <label for="user-username" class="username-label">
+          Github username
+          <input
+            type="text"
+            id="user-search-input"
+            name="user-username"
+            placeholder="Enter a valid github username"
+            aria-autocomplete="inline"
+          />
+        </label>
+        <p class="error-placeholder">-</p>
+        <button type="submit" id="search-profile-btn">Search Profile</button>
+      </form>
+    </section>
     <script src="./main.js"></script>
   </body>
 </html>
