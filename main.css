@@ -282,6 +282,37 @@ body {
 #mobile-user-icon-img {
   border-radius: 50%;
 }
+
+.profile-page-search-error {
+  position: absolute;
+  background-color: red;
+  color: #fff;
+  padding: 1rem;
+  min-width: max-content;
+  max-width: 200px;
+  width: 100vw;
+  text-align: center;
+  left: calc(50vw - 100px);
+  top: -100px;
+  transition: all 0.3s ease;
+  animation: slideDown 3s infinite;
+  animation-play-state: paused;
+}
+
+@keyframes slideDown {
+  20% {
+    top: 20px;
+  }
+  21% {
+    top: 20px;
+  }
+  95% {
+    top: 20px;
+  }
+  100% {
+    top: -100px;
+  }
+}
 /*//////////NAV STYLE ENDS//////////////////////////// */
 
 .main {

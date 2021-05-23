@@ -13,6 +13,7 @@
   </head>
   <body>
     <section id="user-profile-page">
+      <div class="profile-page-search-error">Username</div>
       <header class="header">
         <nav class="navbar closed" id="mobile-navbar">
           <ul class="mobile-nav-wrapper">
@@ -50,7 +51,7 @@
                 width="15"
                 height="15"
               />
-              <span id="mobile-user-icon-img">KenRelic</span></a
+              <span id="mobile-user-name">KenRelic</span></a
             ><a href="" class="mobile-nav-link"
               ><i class="fas fa-sign-out-alt"></i> Sign out</a
             >
@@ -138,13 +139,18 @@
             id="find-repo-search"
           />
           <p class="query-result"></p>
+          <!-- Repos populates here -->
         </section>
-        <!-- Repos populates here -->
       </main>
     </section>
 
     <section id="search-page">
-      <form id="search-form" name="search-user-form" aria-autocomplete="inline">
+      <form
+        id="search-form"
+        name="search-user-form"
+        aria-autocomplete="inline"
+        class="form-search"
+      >
         <a href="#" id="search-page-github-logo"
           ><i class="github fab fa-github"></i
         ></a>

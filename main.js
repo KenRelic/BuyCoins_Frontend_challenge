@@ -11,6 +11,7 @@ const mobileNavBar = document.getElementById("mobile-navbar");
 
 const form = document.getElementById("search-form");
 const errorPlaceholder = document.querySelector(".error-placeholder");
+const popupError = document.querySelector(".profile-page-search-error");
 const repoSection = document.querySelector("#repo-section");
 
 const userFullName = document.querySelector(".user-fullname");
@@ -18,6 +19,7 @@ const userName = document.querySelector(".user-name");
 const userBio = document.querySelector(".user-bio");
 const totalRepo = document.querySelector("#repo-count");
 const userImg = document.querySelector("#user-profile-image");
+const userMobileIconName = document.querySelector("#mobile-user-name");
 const desktopUserImageIcon = document.querySelector(".desktop-user-icon-img");
 const mobileIUserImageIcon = document.querySelector("#mobile-user-icon-img");
 const statusDesktop = document.querySelector(".desktop-user-status");
@@ -44,19 +46,28 @@ mobileSearchBox.addEventListener("focus", () => console.log("SUBMITTING..."));
 form.addEventListener("submit", getProfileDetails);
 
 mobileSearchButton.addEventListener("click", getProfileDetails);
-desktopSearchButton.addEventListener("click", () => getProfileDetails());
+desktopSearchButton.addEventListener("click", getProfileDetails);
 
 async function getProfileDetails(e) {
   const history = searchHistory().get();
+  const searchOrigin = e.target.classList[0].split("-")[0];
+  const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
+
   let profileName = "";
-  if (e) {
+  if (searchOrigin === "form") {
     e.preventDefault();
     profileName = form["user-username"].value;
     if (!profileName) {
-      showError("Please enter a github profile name");
+      return showError("Please enter a github profile name");
     }
+    return displayUserDetails(await queryAPI(profileName));
   } else {
-    console.log("here");
+    // console.log("here");
+    profileName = searchBox[searchOrigin].value;
+    if (!profileName) {
+      return showError("Please enter a github profile name", "popup");
+    }
+    displayUserDetails(await queryAPI(profileName));
   }
 
   if (
@@ -86,11 +97,17 @@ function searchHistory() {
   };
 }
 
-function showError(message) {
-  spinner.style.display = "none";
-  searchButtonText.style.display = "block";
-  errorPlaceholder.style.display = "block";
-  errorPlaceholder.textContent = message;
+function showError(message, type = "inline") {
+  if (type === "popup") {
+    popupError.textContent = message;
+    popupError.style.animationPlayState = "running";
+    setTimeout(() => (popupError.style.animationPlayState = "paused"), 3000);
+  } else {
+    spinner.style.display = "none";
+    searchButtonText.style.display = "block";
+    errorPlaceholder.style.display = "block";
+    errorPlaceholder.textContent = message;
+  }
   return false;
 }
 
@@ -116,6 +133,7 @@ function displayUserDetails(data) {
 
     userFullName.textContent = name;
     userName.textContent = login;
+    userMobileIconName.textContent = login;
     userBio.textContent = bio;
     userImg.src = avatarUrl;
     desktopUserImageIcon.src = avatarUrl;
@@ -189,7 +207,7 @@ function displayUserDetails(data) {
       //no result found
     }
   } else {
-    return showError("The user doesn't exist on Github");
+    return showError("The user doesn't exist on Github", "popup");
   }
 }
 
