@@ -525,6 +525,7 @@ body {
     justify-content: center;
     border-radius: 50%;
     text-align: center;
+    padding-bottom: 1px;
   }
 
   .user-image-section {

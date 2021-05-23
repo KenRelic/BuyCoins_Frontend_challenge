@@ -4,6 +4,7 @@ const searchPage = document.getElementById("search-page");
 const profileDisplayPage = document.getElementById("user-profile-page");
 const searchButton = document.getElementById("search-profile-btn");
 const spinner = document.querySelector("#spinner");
+const searchButtonText = document.querySelector("#search-profile-btn > span");
 
 const menuBarBtn = document.getElementById("mobile-menu-btn");
 const mobileNavBar = document.getElementById("mobile-navbar");
@@ -24,26 +25,48 @@ const statusMobile = document.querySelector(".mobile-user-status");
 const searchResultTotal = document.querySelector(".query-result");
 
 const desktopSearchBox = document.getElementById("desktop-search-input");
+const desktopSearchButton = document.querySelector(
+  ".desktop-navbar-search-btn"
+);
+
 const mobileSearchBox = document.getElementById("mobile-search-input");
+const mobileSearchButton = document.querySelector(".mobile-navbar-search-btn");
 
 function toggleNavBar() {
   mobileNavBar.classList.toggle("open");
 }
 
+function hideSearchHistory() {}
+
 menuBarBtn.addEventListener("click", toggleNavBar);
-desktopSearchBox.addEventListener("submit", () => console.log("SUBMITTING..."));
-mobileSearchBox.addEventListener("submit", () => console.log("SUBMITTING..."));
+desktopSearchBox.addEventListener("focus", () => console.log(";;"));
+mobileSearchBox.addEventListener("focus", () => console.log("SUBMITTING..."));
 form.addEventListener("submit", getProfileDetails);
 
-async function getProfileDetails(e) {
-  e.preventDefault();
-  hideError();
+mobileSearchButton.addEventListener("click", getProfileDetails);
+desktopSearchButton.addEventListener("click", () => getProfileDetails());
 
-  const profileName = form["user-username"].value;
-  if (!profileName) {
-    showError("Please enter a github profile name");
+async function getProfileDetails(e) {
+  const history = searchHistory().get();
+  let profileName = "";
+  if (e) {
+    e.preventDefault();
+    profileName = form["user-username"].value;
+    if (!profileName) {
+      showError("Please enter a github profile name");
+    }
+  } else {
+    console.log("here");
   }
-  displayUserDetails(await queryAPI(profileName));
+
+  if (
+    !history.length ||
+    history[history.length - 1].trim() !== profileName.trim()
+  ) {
+    hideError();
+    searchHistory().set(profileName);
+    displayUserDetails(await queryAPI(profileName));
+  }
 }
 
 function searchHistory() {
@@ -65,13 +88,15 @@ function searchHistory() {
 
 function showError(message) {
   spinner.style.display = "none";
+  searchButtonText.style.display = "block";
   errorPlaceholder.style.display = "block";
   errorPlaceholder.textContent = message;
   return false;
 }
 
 function hideError() {
-  spinner.style.display = "unset";
+  spinner.style.display = "block";
+  searchButtonText.style.display = "none";
   errorPlaceholder.style.display = "none";
   errorPlaceholder.textContent = "-";
 }
