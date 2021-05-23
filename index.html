@@ -12,7 +12,7 @@
     ></script>
   </head>
   <body>
-    <section id="profile-section">
+    <section id="user-profile-page">
       <header class="header">
         <nav class="navbar closed" id="mobile-navbar">
           <ul class="mobile-nav-wrapper">
@@ -101,17 +101,15 @@
                 src="./kenchi.png"
                 alt="user image"
               />
-              <div class="desktop-user-status">🎯</div>
+              <div class="desktop-user-status"></div>
             </div>
             <div class="user-bio-section">
-              <p class="user-fullname">Simeon Kenneth T.</p>
-              <p class="user-name">KenRelic</p>
-              <p class="user-bio">
-                Frontend Developer and User interface Designer
-              </p>
+              <p class="user-fullname"></p>
+              <p class="user-name"></p>
+              <p class="user-bio"></p>
             </div>
           </div>
-          <div class="mobile-user-status">🎯 Focusing</div>
+          <div class="mobile-user-status"></div>
         </section>
         <section class="section" id="profile-tab-section">
           <a class="profile-tab overview-tab"
@@ -138,31 +136,8 @@
             id="find-repo-search"
           />
           <p class="query-result">20 Results for Public Repositories</p>
-          <div class="user-repository">
-            <div class="repo-detail">
-              <a href="#" class="repo-name">Simple Server</a>
-              <p class="repo-description">
-                Testing an app to check responsiveness. Trying to test the app.
-              </p>
-              <div class="repo-meta-data">
-                <div class="language">
-                  <div class="language-color"></div>
-                  HTML
-                </div>
-                <span class="repo-star"
-                  ><i class="far fa-star"></i>&nbsp;20</span
-                >
-                <span class="repo-fork"
-                  ><i class="fas fa-code-branch"></i>&nbsp;20</span
-                >
-                <span class="repo-date">Updated on 1 Oct</span>
-              </div>
-            </div>
-            <div class="github-star">
-              <span class="repo-star"><i class="far fa-star"></i></span> Star
-            </div>
-          </div>
         </section>
+        <!-- Repos populates here -->
       </main>
     </section>
 
@@ -186,7 +161,10 @@
           />
         </label>
         <p class="error-placeholder">-</p>
-        <button type="submit" id="search-profile-btn">Search Profile</button>
+        <button type="submit" id="search-profile-btn">
+          <i class="fas fa-spinner" id="spinner"> </i
+          ><span>Search Profile</span>
+        </button>
       </form>
     </section>
     <script src="./main.js"></script>
