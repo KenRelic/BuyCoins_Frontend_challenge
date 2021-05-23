@@ -152,6 +152,14 @@ function displayUserDetails(data) {
       statusDesktop.style.display = "none";
       statusMobile.style.display = "none";
     }
+    const allRepos = document.querySelector(".repos-div");
+
+    console.log(allRepos);
+    if (allRepos) repoSection.removeChild(allRepos);
+
+    const newRopsDiv = document.createElement("div");
+    newRopsDiv.classList.add("repos-div");
+
     if (nodes) {
       nodes.map((repo) => {
         const {
@@ -199,9 +207,9 @@ function displayUserDetails(data) {
             <div class="github-star">
               <span class="repo-star"><i class="far fa-star"></i></span> Star
             </div>`;
-        repoSection.appendChild(div);
+        newRopsDiv.appendChild(div);
       });
-
+      repoSection.appendChild(newRopsDiv);
       showRepoPage();
     } else {
       //no result found
@@ -249,7 +257,7 @@ async function queryAPI(profileName) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "",
+      Authorization: "Bearer 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",
     },
     body: JSON.stringify({
       query,
