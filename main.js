@@ -3,11 +3,15 @@
 const searchPage = document.getElementById("search-page");
 const profileDisplayPage = document.getElementById("user-profile-page");
 const searchButton = document.getElementById("search-profile-btn");
-const spinner = document.querySelector("#spinner");
+const spinner = document.querySelector("#form-spinner");
 const searchButtonText = document.querySelector("#search-profile-btn > span");
 
 const menuBarBtn = document.getElementById("mobile-menu-btn");
 const mobileNavBar = document.getElementById("mobile-navbar");
+
+const profilePageSearchLoader = document.querySelector(
+  ".profile-page-search-loader"
+);
 
 const form = document.getElementById("search-form");
 const errorPlaceholder = document.querySelector(".error-placeholder");
@@ -50,34 +54,53 @@ desktopSearchButton.addEventListener("click", getProfileDetails);
 
 async function getProfileDetails(e) {
   const history = searchHistory().get();
+  if (history.length > 4) history.splice(0, 1);
+
   const searchOrigin = e.target.classList[0].split("-")[0];
   const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
 
   let profileName = "";
   if (searchOrigin === "form") {
+    hideError();
     e.preventDefault();
     profileName = form["user-username"].value;
+
     if (!profileName) {
       return showError("Please enter a github profile name");
     }
-    return displayUserDetails(await queryAPI(profileName));
+
+    searchHistory().set(profileName.trim());
+    return displayUserDetails(await queryAPI(profileName.trim()));
   } else {
-    // console.log("here");
     profileName = searchBox[searchOrigin].value;
     if (!profileName) {
       return showError("Please enter a github profile name", "popup");
     }
-    displayUserDetails(await queryAPI(profileName));
-  }
+    if (searchOrigin === "mobile") toggleNavBar();
 
-  if (
-    !history.length ||
-    history[history.length - 1].trim() !== profileName.trim()
-  ) {
-    hideError();
-    searchHistory().set(profileName);
-    displayUserDetails(await queryAPI(profileName));
+    if (profileName.trim() === window.localStorage.getItem("noUser")) {
+      return showError("The user doesn't exist on Github", "popup");
+    }
+
+    showProfilePageLoader();
+
+    if (history[history.length - 1] !== profileName.trim()) {
+      searchHistory().set(profileName.trim());
+      displayUserDetails(await queryAPI(profileName.trim()));
+    }
+
+    setTimeout(() => hideProfilePageLoader(), 2000);
   }
+}
+
+function showProfilePageLoader() {
+  profilePageSearchLoader.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function hideProfilePageLoader() {
+  profilePageSearchLoader.style.display = "none";
+  document.body.style.overflow = "unset";
 }
 
 function searchHistory() {
@@ -94,6 +117,7 @@ function searchHistory() {
       window.localStorage.setItem("searchStore", JSON.stringify(searchStore));
     },
     get: () => searchStore,
+    getLastSearch: () => searchStore[searchStore.length - 1],
   };
 }
 
@@ -154,13 +178,12 @@ function displayUserDetails(data) {
     }
     const allRepos = document.querySelector(".repos-div");
 
-    console.log(allRepos);
     if (allRepos) repoSection.removeChild(allRepos);
 
     const newRopsDiv = document.createElement("div");
     newRopsDiv.classList.add("repos-div");
 
-    if (nodes) {
+    if (nodes.length) {
       nodes.map((repo) => {
         const {
           name,
@@ -213,8 +236,20 @@ function displayUserDetails(data) {
       showRepoPage();
     } else {
       //no result found
+      const noRepoDiv = document.createElement("div");
+      noRepoDiv.innerHTML = `
+        <p class="no-repo">No Repository found </p>
+      `;
+      newRopsDiv.appendChild(noRepoDiv);
+      repoSection.appendChild(newRopsDiv);
     }
+    setTimeout(() => hideProfilePageLoader(), 3000);
   } else {
+    hideProfilePageLoader();
+    hideError();
+
+    const lastSearch = searchHistory().getLastSearch();
+    window.localStorage.setItem("noUser", lastSearch);
     return showError("The user doesn't exist on Github", "popup");
   }
 }
@@ -257,7 +292,7 @@ async function queryAPI(profileName) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "Bearer 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",
+      Authorization: "",
     },
     body: JSON.stringify({
       query,

@@ -13,7 +13,10 @@
   </head>
   <body>
     <section id="user-profile-page">
-      <div class="profile-page-search-error">Username</div>
+      <div class="profile-page-search-error"></div>
+      <div class="profile-page-search-loader">
+        <i class="fas fa-spinner" id="profile-spinner"> </i>
+      </div>
       <header class="header">
         <nav class="navbar closed" id="mobile-navbar">
           <ul class="mobile-nav-wrapper">
@@ -47,7 +50,8 @@
             ><a href="" class="mobile-nav-link mobile-user-icon-wrapper"
               ><img
                 id="mobile-user-icon-img"
-                src="./kenchi.png"
+                src="./no-image.png"
+                alt="user image"
                 width="15"
                 height="15"
               />
@@ -84,7 +88,7 @@
             ></a>
             <a href="#" class="desktop-user-icon">
               <img
-                src="./kenchi.png"
+                src="./no-image.png"
                 alt="user-image"
                 class="desktop-user-icon-img"
                 width="18"
@@ -101,7 +105,7 @@
             <div class="user-image-section">
               <img
                 id="user-profile-image"
-                src="./kenchi.png"
+                src="./no-image.png"
                 alt="user image"
               />
               <div class="desktop-user-status"></div>
@@ -170,7 +174,7 @@
         </label>
         <p class="error-placeholder">-</p>
         <button type="submit" id="search-profile-btn">
-          <i class="fas fa-spinner" id="spinner"> </i
+          <i class="fas fa-spinner" id="form-spinner"> </i
           ><span>Search Profile</span>
         </button>
       </form>

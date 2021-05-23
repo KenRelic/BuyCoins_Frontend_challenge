@@ -68,6 +68,14 @@ body {
   display: block;
   margin-top: 5px;
 }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
 #user-search-input:focus {
   outline: 1px solid #97cbff;
 }
@@ -93,7 +101,8 @@ body {
   margin-top: 24px;
 }
 
-#spinner {
+#form-spinner,
+#profile-spinner {
   display: none;
   animation: spin 1s linear infinite;
 }
@@ -283,6 +292,26 @@ body {
   border-radius: 50%;
 }
 
+.profile-page-search-loader {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 3rem !important;
+  color: #828382 !important;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  background-color: #ffffffe7;
+  z-index: 100;
+}
+
+.profile-page-search-loader i#profile-spinner {
+  display: block !important;
+}
+
 .profile-page-search-error {
   position: absolute;
   background-color: red;
@@ -357,7 +386,7 @@ body {
   font-size: 10px;
   padding: 0.2px 4px;
   background-color: #4343435d;
-  border-radius: 34%;
+  border-radius: 10px;
 }
 .user-image-section {
   position: relative;
@@ -496,6 +525,12 @@ body {
 
 .github-star:hover {
   border: 1px solid #090909d0;
+}
+.no-repo {
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  color: grey;
 }
 
 @media screen and (max-width: 399px) {
