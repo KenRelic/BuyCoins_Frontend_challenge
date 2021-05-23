@@ -46,6 +46,23 @@ async function getProfileDetails(e) {
   displayUserDetails(await queryAPI(profileName));
 }
 
+function searchHistory() {
+  let searchStore = [];
+  if (window.localStorage.getItem("searchStore")) {
+    searchStore = [...JSON.parse(window.localStorage.getItem("searchStore"))];
+  } else {
+    window.localStorage.setItem("searchStore", JSON.stringify(searchStore));
+  }
+
+  return {
+    set: (value) => {
+      searchStore.push(value);
+      window.localStorage.setItem("searchStore", JSON.stringify(searchStore));
+    },
+    get: () => searchStore,
+  };
+}
+
 function showError(message) {
   spinner.style.display = "none";
   errorPlaceholder.style.display = "block";
@@ -92,26 +109,26 @@ function displayUserDetails(data) {
       statusDesktop.style.display = "none";
       statusMobile.style.display = "none";
     }
+    if (nodes) {
+      nodes.map((repo) => {
+        const {
+          name,
+          description,
+          stargazerCount,
+          updatedAt,
+          forkCount,
+          primaryLanguage,
+        } = repo;
 
-    nodes.map((repo) => {
-      const {
-        name,
-        description,
-        stargazerCount,
-        updatedAt,
-        forkCount,
-        primaryLanguage,
-      } = repo;
+        const colorName = primaryLanguage ? primaryLanguage.color : "none";
+        const languageName = primaryLanguage ? primaryLanguage.name : "";
 
-      const colorName = primaryLanguage ? primaryLanguage.color : "none";
-      const languageName = primaryLanguage ? primaryLanguage.name : "";
+        const date = new Date(updatedAt).toDateString().split(" ");
 
-      const date = new Date(updatedAt).toDateString().split(" ");
-
-      // console.log(repo, name, updatedAt, primaryLanguage);
-      const div = document.createElement("div");
-      div.classList.add("user-repository");
-      div.innerHTML = `<div class="repo-detail">
+        // console.log(repo, name, updatedAt, primaryLanguage);
+        const div = document.createElement("div");
+        div.classList.add("user-repository");
+        div.innerHTML = `<div class="repo-detail">
               <a href="#" class="repo-name">${name}</a>
               <p class="repo-description" style="display:${
                 !description ? "none" : "unset"
@@ -132,17 +149,20 @@ function displayUserDetails(data) {
                   ><i class="fas fa-code-branch"></i>&nbsp;${forkCount}</span
                 >
                 <span class="repo-date">Updated on ${date[2]}&nbsp;${
-        date[1]
-      }</span>
+          date[1]
+        }</span>
               </div>
             </div>
             <div class="github-star">
               <span class="repo-star"><i class="far fa-star"></i></span> Star
             </div>`;
-      repoSection.appendChild(div);
-    });
+        repoSection.appendChild(div);
+      });
 
-    showRepoPage();
+      showRepoPage();
+    } else {
+      //no result found
+    }
   } else {
     return showError("The user doesn't exist on Github");
   }
