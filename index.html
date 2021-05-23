@@ -31,6 +31,7 @@
                 name=""
                 placeholder="Search or jump to.."
                 id="mobile-search-input"
+                autocomplete="on"
               />
               <span class="mobile-navbar-search-btn">/</span>
             </div>
@@ -66,6 +67,7 @@
                 name=""
                 placeholder="Search or jump to.."
                 id="desktop-search-input"
+                autocomplete="on"
               />
               <span class="desktop-navbar-search-btn">/</span>
             </div>
@@ -135,21 +137,21 @@
             placeholder="Find a repository..."
             id="find-repo-search"
           />
-          <p class="query-result">20 Results for Public Repositories</p>
+          <p class="query-result"></p>
         </section>
         <!-- Repos populates here -->
       </main>
     </section>
 
     <section id="search-page">
-      <a href="#" id="search-page-github-logo"
-        ><i class="github fab fa-github"></i
-      ></a>
-      <h1 id="form-title">GitHub Profiler</h1>
-      <p class="form-subheading">
-        Enter a github profile username to get all public repo of the user
-      </p>
       <form id="search-form" name="search-user-form" aria-autocomplete="inline">
+        <a href="#" id="search-page-github-logo"
+          ><i class="github fab fa-github"></i
+        ></a>
+        <h1 id="form-title">GitHub Profiler</h1>
+        <p class="form-subheading">
+          Enter a github profile username to get all public repo of the user
+        </p>
         <label for="user-username" class="username-label">
           Github username
           <input

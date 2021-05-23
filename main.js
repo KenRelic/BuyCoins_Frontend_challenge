@@ -21,12 +21,18 @@ const desktopUserImageIcon = document.querySelector(".desktop-user-icon-img");
 const mobileIUserImageIcon = document.querySelector("#mobile-user-icon-img");
 const statusDesktop = document.querySelector(".desktop-user-status");
 const statusMobile = document.querySelector(".mobile-user-status");
+const searchResultTotal = document.querySelector(".query-result");
+
+const desktopSearchBox = document.getElementById("desktop-search-input");
+const mobileSearchBox = document.getElementById("mobile-search-input");
 
 function toggleNavBar() {
   mobileNavBar.classList.toggle("open");
 }
 
 menuBarBtn.addEventListener("click", toggleNavBar);
+desktopSearchBox.addEventListener("submit", () => console.log("SUBMITTING..."));
+mobileSearchBox.addEventListener("submit", () => console.log("SUBMITTING..."));
 form.addEventListener("submit", getProfileDetails);
 
 async function getProfileDetails(e) {
@@ -42,15 +48,14 @@ async function getProfileDetails(e) {
 
 function showError(message) {
   spinner.style.display = "none";
-
-  errorPlaceholder.style.visibility = "visible";
+  errorPlaceholder.style.display = "block";
   errorPlaceholder.textContent = message;
   return false;
 }
 
 function hideError() {
   spinner.style.display = "unset";
-  errorPlaceholder.style.visibility = "hidden";
+  errorPlaceholder.style.display = "none";
   errorPlaceholder.textContent = "-";
 }
 
@@ -59,21 +64,34 @@ function displayUserDetails(data) {
     const user = data.user;
     const {
       name,
+      login,
       bio,
       avatarUrl,
       repositories: { nodes, totalCount },
-      status: { emojiHTML, message },
+      status,
     } = user;
     // console.log(name, bio, nodes);
 
     userFullName.textContent = name;
+    userName.textContent = login;
     userBio.textContent = bio;
     userImg.src = avatarUrl;
     desktopUserImageIcon.src = avatarUrl;
     mobileIUserImageIcon.src = avatarUrl;
-    statusDesktop.innerHTML = emojiHTML;
     totalRepo.textContent = totalCount;
-    statusMobile.innerHTML = `${emojiHTML} ${message}`;
+    searchResultTotal.textContent = `${
+      totalCount > 20 ? 20 : totalCount
+    } Results for Public Repositories`;
+
+    if (status) {
+      statusDesktop.innerHTML = status ? status.emojiHTML : "";
+      statusMobile.innerHTML = `${status ? status.emojiHTML : ""} ${
+        status ? status.message : ""
+      }`;
+    } else {
+      statusDesktop.style.display = "none";
+      statusMobile.style.display = "none";
+    }
 
     nodes.map((repo) => {
       const {
@@ -87,6 +105,8 @@ function displayUserDetails(data) {
 
       const colorName = primaryLanguage ? primaryLanguage.color : "none";
       const languageName = primaryLanguage ? primaryLanguage.name : "";
+
+      const date = new Date(updatedAt).toDateString().split(" ");
 
       // console.log(repo, name, updatedAt, primaryLanguage);
       const div = document.createElement("div");
@@ -111,7 +131,9 @@ function displayUserDetails(data) {
                 <span class="repo-fork"
                   ><i class="fas fa-code-branch"></i>&nbsp;${forkCount}</span
                 >
-                <span class="repo-date">Updated on ${updatedAt}</span>
+                <span class="repo-date">Updated on ${date[2]}&nbsp;${
+        date[1]
+      }</span>
               </div>
             </div>
             <div class="github-star">
@@ -135,6 +157,7 @@ async function queryAPI(profileName) {
   const query = `{
   user(login:"${profileName}"){
     name
+    login
     bio 
     avatarUrl
     status{
