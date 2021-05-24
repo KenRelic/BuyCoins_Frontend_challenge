@@ -235,6 +235,7 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 3px 5px;
   font-size: 12px;
   height: 30px;
+  display: flex;
 }
 
 .mobile-search-box {
@@ -258,6 +259,7 @@ input[type="search"]::-webkit-search-results-decoration {
   outline: none;
   color: #fff;
   font-size: 12px;
+  width: 100%;
 }
 
 #desktop-search-input::placeholder,
