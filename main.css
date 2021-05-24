@@ -207,6 +207,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .desktop-nav-item {
   font-size: 13px;
+  position: relative;
 }
 
 .desktop-nav-action .fa-caret-down {
@@ -217,6 +218,7 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #fff;
   list-style: none;
   font-size: 18px;
+  position: relative;
 }
 
 #mobile-menu-btn {
@@ -343,6 +345,22 @@ input[type="search"]::-webkit-search-results-decoration {
   100% {
     top: -100px;
   }
+}
+
+.notice {
+  background: blue;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  right: -2px;
+  top: 2px;
+}
+
+.desktop-nav-item .notice {
+  height: 7px;
+  width: 7px;
+  right: -1px;
 }
 /*//////////NAV STYLE ENDS//////////////////////////// */
 

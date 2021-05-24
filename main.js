@@ -36,6 +36,7 @@ const desktopSearchButton = document.querySelector(
 );
 
 const githubBackBtns = document.querySelectorAll(".github-back");
+const signOutBtn = document.getElementById("sign-out-btn");
 
 const mobileSearchBox = document.getElementById("mobile-search-input");
 const mobileSearchButton = document.querySelector(".mobile-navbar-search-btn");
@@ -53,14 +54,18 @@ form.addEventListener("submit", getProfileDetails);
 githubBackBtns.forEach((btn) =>
   btn.addEventListener("click", goBackToSearchPage)
 );
+signOutBtn.addEventListener("click", goBackToSearchPage);
 
 mobileSearchButton.addEventListener("click", getProfileDetails);
 desktopSearchButton.addEventListener("click", getProfileDetails);
 
 const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
 
-function goBackToSearchPage() {
+function goBackToSearchPage(e) {
+  const target = e.target.classList[0].split("-")[0];
+
   form["user-username"].value = "";
+  if (target === "mobile") toggleNavBar();
 
   profileDisplayPage.style.display = "none";
   searchPage.style.display = "flex";
