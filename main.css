@@ -57,8 +57,13 @@ body {
   margin: 0 auto;
 }
 
+input {
+  padding: 10px !important;
+}
+
 .username-label {
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 #user-search-input {
@@ -92,7 +97,7 @@ input[type="search"]::-webkit-search-results-decoration {
   min-width: 120px;
   display: block;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   border: 1px solid #dfdfdf41;
   color: #fff;
   background-color: #2ea44f;
@@ -252,6 +257,7 @@ input[type="search"]::-webkit-search-results-decoration {
   color: grey;
   float: right;
   height: 92%;
+  cursor: pointer;
 }
 
 #desktop-search-input,

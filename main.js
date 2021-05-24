@@ -1,5 +1,4 @@
 import _ from "./_.js";
-console.log(_);
 
 const searchPage = document.getElementById("search-page");
 const profileDisplayPage = document.getElementById("user-profile-page");
