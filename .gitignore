@@ -1,0 +1,4 @@
+webpack.config
+*.config
+node_modules
+*.env

@@ -340,7 +340,7 @@ async function queryAPI(profileName) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: "",
+      Authorization: `${process.env.AUTH}`,
     },
     body: JSON.stringify({
       query,
