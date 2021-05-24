@@ -35,6 +35,8 @@ const desktopSearchButton = document.querySelector(
   ".desktop-navbar-search-btn"
 );
 
+const githubBackBtns = document.querySelectorAll(".github-back");
+
 const mobileSearchBox = document.getElementById("mobile-search-input");
 const mobileSearchButton = document.querySelector(".mobile-navbar-search-btn");
 
@@ -48,32 +50,56 @@ menuBarBtn.addEventListener("click", toggleNavBar);
 desktopSearchBox.addEventListener("focus", () => console.log(";;"));
 mobileSearchBox.addEventListener("focus", () => console.log("SUBMITTING..."));
 form.addEventListener("submit", getProfileDetails);
+githubBackBtns.forEach((btn) =>
+  btn.addEventListener("click", goBackToSearchPage)
+);
 
 mobileSearchButton.addEventListener("click", getProfileDetails);
 desktopSearchButton.addEventListener("click", getProfileDetails);
 
+const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
+
+function goBackToSearchPage() {
+  form["user-username"].value = "";
+
+  profileDisplayPage.style.display = "none";
+  searchPage.style.display = "flex";
+
+  const allRepos = document.querySelector(".repos-div");
+  if (allRepos) repoSection.removeChild(allRepos);
+}
+
 async function getProfileDetails(e) {
+  // debugger;
   const history = searchHistory().get();
-  if (history.length > 4) history.splice(0, 1);
+
+  if (history.length > 4) {
+    history.splice(0, 1);
+    window.localStorage.setItem("searchStore", JSON.stringify(history));
+  }
 
   const searchOrigin = e.target.classList[0].split("-")[0];
-  const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
 
   let profileName = "";
   if (searchOrigin === "form") {
-    hideError();
     e.preventDefault();
+    hideError();
+
     profileName = form["user-username"].value;
 
-    if (!profileName) {
+    if (!profileName || !profileName.trim()) {
       return showError("Please enter a github profile name");
     }
 
+    if (profileName.trim() === window.localStorage.getItem("noUser")) {
+      return showError("The user doesn't exist on Github");
+    }
+
     searchHistory().set(profileName.trim());
-    return displayUserDetails(await queryAPI(profileName.trim()));
+    return displayUserDetails(await queryAPI(profileName.trim()), "form");
   } else {
     profileName = searchBox[searchOrigin].value;
-    if (!profileName) {
+    if (!profileName || !profileName.trim()) {
       return showError("Please enter a github profile name", "popup");
     }
     if (searchOrigin === "mobile") toggleNavBar();
@@ -114,10 +140,15 @@ function searchHistory() {
   return {
     set: (value) => {
       searchStore.push(value);
+      searchStore = [...new Set(searchStore)];
       window.localStorage.setItem("searchStore", JSON.stringify(searchStore));
     },
     get: () => searchStore,
     getLastSearch: () => searchStore[searchStore.length - 1],
+    splice: () => {
+      searchStore.splice(0, 1);
+      window.localStorage.setItem("searchStore", JSON.stringify(searchStore));
+    },
   };
 }
 
@@ -127,8 +158,7 @@ function showError(message, type = "inline") {
     popupError.style.animationPlayState = "running";
     setTimeout(() => (popupError.style.animationPlayState = "paused"), 3000);
   } else {
-    spinner.style.display = "none";
-    searchButtonText.style.display = "block";
+    hideSearchPageSpinner();
     errorPlaceholder.style.display = "block";
     errorPlaceholder.textContent = message;
   }
@@ -136,13 +166,22 @@ function showError(message, type = "inline") {
 }
 
 function hideError() {
-  spinner.style.display = "block";
-  searchButtonText.style.display = "none";
+  showSearchPageSpinner();
   errorPlaceholder.style.display = "none";
   errorPlaceholder.textContent = "-";
 }
 
-function displayUserDetails(data) {
+function showSearchPageSpinner() {
+  spinner.style.display = "block";
+  searchButtonText.style.display = "none";
+}
+
+function hideSearchPageSpinner() {
+  spinner.style.display = "none";
+  searchButtonText.style.display = "block";
+}
+
+function displayUserDetails(data, origin = "profile") {
   if (data.user) {
     const user = data.user;
     const {
@@ -242,15 +281,19 @@ function displayUserDetails(data) {
       `;
       newRopsDiv.appendChild(noRepoDiv);
       repoSection.appendChild(newRopsDiv);
+      showRepoPage();
     }
+    hideSearchPageSpinner();
     setTimeout(() => hideProfilePageLoader(), 3000);
   } else {
     hideProfilePageLoader();
-    hideError();
+    hideSearchPageSpinner();
 
     const lastSearch = searchHistory().getLastSearch();
     window.localStorage.setItem("noUser", lastSearch);
-    return showError("The user doesn't exist on Github", "popup");
+    return origin === "form"
+      ? showError("The user doesn't exist on Github")
+      : showError("The user doesn't exist on Github", "popup");
   }
 }
 
