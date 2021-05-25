@@ -11,7 +11,7 @@ html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   width: 100%;
 }
@@ -235,6 +235,10 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #fff;
 }
 
+.github-back {
+  cursor: pointer;
+}
+
 .search-box {
   border: 1px solid #ffffff1b;
   background: #0d1117;
@@ -336,6 +340,7 @@ input[type="search"]::-webkit-search-results-decoration {
   transition: all 0.3s ease;
   animation: slideDown 3s infinite;
   animation-play-state: paused;
+  z-index: 300;
 }
 
 @keyframes slideDown {
@@ -404,6 +409,11 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .profile-tab:hover {
+  border-bottom: 2px solid tomato;
+  font-weight: bold;
+}
+
+.repo-tab {
   border-bottom: 2px solid tomato;
   font-weight: bold;
 }
@@ -638,7 +648,8 @@ input[type="search"]::-webkit-search-results-decoration {
   }
 
   .user-fullname {
-    font-size: 90%;
+    /* font-size: 0%; */
+    font-size: 1.5rem;
     /* word-break: break-all; */
     overflow: hidden;
     /* white-space: nowrap; */
@@ -668,6 +679,7 @@ input[type="search"]::-webkit-search-results-decoration {
     min-width: 100vw;
     position: absolute;
     left: 0;
+    z-index: -1;
   }
 
   #profile-section,

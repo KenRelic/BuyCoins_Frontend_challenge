@@ -48,8 +48,28 @@ function toggleNavBar() {
 function hideSearchHistory() {}
 
 menuBarBtn.addEventListener("click", toggleNavBar);
-desktopSearchBox.addEventListener("focus", () => console.log(";;"));
-mobileSearchBox.addEventListener("focus", () => console.log("SUBMITTING..."));
+desktopSearchBox.addEventListener("keydown", (e) =>
+  getDetailsOnEnter(e, "desktop")
+);
+mobileSearchBox.addEventListener("keydown", (e) =>
+  getDetailsOnEnter(e, "mobile")
+);
+
+function getDetailsOnEnter(e, screen) {
+  var code;
+  if (e.key !== undefined) {
+    code = e.key.toUpperCase();
+  } else if (e.keyIdentifier !== undefined) {
+    code = e.keyIdentifier;
+  } else if (e.keyCode !== undefined) {
+    code = e.keyCode;
+  }
+
+  if (code === "ENTER" || code === 13) {
+    getProfileDetails(null, screen);
+  }
+}
+
 form.addEventListener("submit", getProfileDetails);
 githubBackBtns.forEach((btn) =>
   btn.addEventListener("click", goBackToSearchPage)
@@ -61,8 +81,13 @@ desktopSearchButton.addEventListener("click", getProfileDetails);
 
 const searchBox = { mobile: mobileSearchBox, desktop: desktopSearchBox };
 
-function goBackToSearchPage(e) {
-  const target = e.target.classList[0].split("-")[0];
+function goBackToSearchPage(e, keyOrigin = null) {
+  let target;
+  if (!keyOrigin) {
+    target = e.target.classList[0].split("-")[0];
+  } else {
+    target = keyOrigin;
+  }
 
   form["user-username"].value = "";
   if (target === "mobile") toggleNavBar();
@@ -74,7 +99,7 @@ function goBackToSearchPage(e) {
   if (allRepos) repoSection.removeChild(allRepos);
 }
 
-async function getProfileDetails(e) {
+async function getProfileDetails(e, screen = null) {
   // debugger;
   const history = searchHistory().get();
 
@@ -82,8 +107,12 @@ async function getProfileDetails(e) {
     history.splice(0, 1);
     window.localStorage.setItem("searchStore", JSON.stringify(history));
   }
-
-  const searchOrigin = e.target.classList[0].split("-")[0];
+  let searchOrigin;
+  if (!screen) {
+    searchOrigin = e.target.classList[0].split("-")[0];
+  } else {
+    searchOrigin = screen;
+  }
 
   let profileName = "";
   if (searchOrigin === "form") {
@@ -213,9 +242,9 @@ function displayUserDetails(data, origin = "profile") {
 
     if (status) {
       statusDesktop.innerHTML = status ? status.emojiHTML : "";
-      statusMobile.innerHTML = `${status ? status.emojiHTML : ""} ${
-        status ? status.message : ""
-      }`;
+      statusMobile.innerHTML = `${
+        status && status.emojiHTML ? status.emojiHTML : ""
+      } ${status && status.message ? status.message : ""}`;
     } else {
       statusDesktop.style.display = "none";
       statusMobile.style.display = "none";
