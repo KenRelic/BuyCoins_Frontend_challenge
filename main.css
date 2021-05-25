@@ -105,6 +105,9 @@ input[type="search"]::-webkit-search-results-decoration {
   cursor: pointer;
   margin-top: 24px;
 }
+#form-spinner {
+  pointer-events: none;
+}
 
 #form-spinner,
 #profile-spinner {
