@@ -682,11 +682,12 @@ input[type="search"]::-webkit-search-results-decoration {
     min-width: 100vw;
     position: absolute;
     left: 0;
-    z-index: -1;
+    z-index: 1;
   }
 
   #profile-section,
   #repo-section {
     margin-top: 2rem;
+    z-index: 3;
   }
 }
